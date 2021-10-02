@@ -19,7 +19,12 @@ class CreatePostsTable extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            
+            $table->string('title');
+            $table->string('slug');
+            $table->string('description');
+            $table->text('content');
+            $table->integer('likes');
+            $table->string('img_url');
 
             $table->timestamps();
         });
