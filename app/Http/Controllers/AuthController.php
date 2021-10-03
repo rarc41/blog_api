@@ -82,31 +82,66 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
-            'user'=>auth()->user()
+            'user' => auth()->user()
         ]);
     }
 
     public function register(Request $request)
     {
-        $validator=Validator::make($request->all(), [
-            'name'=> 'required',
-            'email'=> 'required|string|email|max:100|unique:users',
-            'password'=> 'required|string|min:6',
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|string|email|max:100|unique:users',
+            'password' => 'required|string|min:6',
             // 'password_confirm' =>'required|string|min:6'
         ]);
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        $user=User::create(array_merge(
+        $user = User::create(array_merge(
             $validator->validate(),
-            ['password'=> bcrypt($request->password)]
+            ['password' => bcrypt($request->password)]
         ));
 
         return response()->json([
             'message' => '¡User regestered successfully!',
-            'user'=> $user
+            'user' => $user
         ], 201);
+    }
+
+    public function update(Request $request, User $user)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|string|email|max:100|unique:users',
+            'password' => 'required|string|min:6',
+            // 'password_confirm' =>'required|string|min:6'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->password=bcrypt($request->password);
+        $user->save();
+
+        return response()->json([
+            'Message' =>'Succesfully updated',
+            'User' =>$user,
+        ]);
+
+    }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return response()->json([
+            'Message' =>'Succesfully deleted',
+            'User' =>$user,
+        ]);
     }
 }

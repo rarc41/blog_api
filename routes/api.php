@@ -28,6 +28,30 @@ Route::group([
     Route::post('login', 'App\Http\Controllers\AuthController@login');
     Route::post('logout', 'App\Http\Controllers\AuthController@logout');
     Route::post('refresh', 'App\Http\Controllers\AuthController@refresh');
-    Route::post('me', 'App\Http\Controllers\AuthController@me');
+    Route::get('me', 'App\Http\Controllers\AuthController@me');
     Route::post('register', 'App\Http\Controllers\AuthController@register');
+    Route::put('users/{user}', 'App\Http\Controllers\AuthController@update');
+    Route::delete('users/{user}', 'App\Http\Controllers\AuthController@destroy');
+
+
+
 });
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'posts'
+
+], function ($router) {
+
+    Route::get('all', 'App\Http\Controllers\PostsController@index'); //mostrar todos los posts
+    Route::get('{post}', 'App\Http\Controllers\PostsController@show'); //traer un post escpecifico
+    Route::put('update/{post}', 'App\Http\Controllers\PostsController@update'); //editar
+    Route::post('new', 'App\Http\Controllers\PostsController@store'); //crear nuevo post
+
+    Route::delete('delete/{post}', 'App\Http\Controllers\PostsController@destroy'); //borrar un post
+
+
+
+});
+
