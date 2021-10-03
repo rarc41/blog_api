@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Comments;
+use App\Models\User;
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CommentsFactory extends Factory
@@ -22,7 +24,9 @@ class CommentsFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => User::all()->random()->id,
+            'post_id' => Post::all()->random()->id,
+            'content' =>$this->faker->paragraph(2,6),
         ];
     }
 }
