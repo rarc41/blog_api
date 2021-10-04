@@ -8,7 +8,7 @@
 </p>
 
 ## About This Api
-This appi allow make all curd functionalitis,  in the file Route/api.php, there is every endpoint with coomment about the controller
+This appi allow make all curd functionalitis,  in the file Route/api.php, there is every endpoint with coomment about the controller. Use the comand  ```php artisan serve``` for run the client
 
 ## About Laravel
 
