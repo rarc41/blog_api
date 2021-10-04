@@ -8,7 +8,7 @@
 </p>
 
 ## About This Api
-This appi allow make all curd functionalitis,  in the file Route/api.php, there is every endpoint with coomment about the controller. Use the comand  ```php artisan serve``` for run the client
+This appi allow make all curd functionalitis,  in the file Route/api.php, there is every endpoint with coomment about the controller. Use the comand  ```php artisan serve``` for run the client and ```php artisan migrate:refresh --seed```  to field the database with test data,  in the file .env you can configurate a databasewith your credentials
 
 ## About Laravel
 
